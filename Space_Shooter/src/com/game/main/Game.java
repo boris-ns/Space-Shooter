@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import com.game.graphics.Window;
+import com.game.objects.ObjectId;
+import com.game.objects.Player;
 
 public class Game extends Canvas implements Runnable
 {
@@ -14,16 +16,18 @@ public class Game extends Canvas implements Runnable
 	private static final long serialVersionUID = 1L;
 	private Thread thread;
 	private boolean running = false;
+	private Player player;
 
 
 	public Game()
 	{
 		new Window(WIDTH, HEIGHT, "Space Shooter", this);
+		player = new Player(WIDTH / 2 - 32, ObjectId.Player);
 	}
 	
 	public void tick()
 	{
-		
+		player.tick();
 	}
 	
 	public void render()
@@ -39,6 +43,8 @@ public class Game extends Canvas implements Runnable
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		player.render(g);
 		
 		g.dispose();
 		bs.show();
