@@ -1,6 +1,9 @@
 package com.game.main;
 
 import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 
 import com.game.graphics.Window;
 
@@ -25,7 +28,20 @@ public class Game extends Canvas implements Runnable
 	
 	public void render()
 	{
+		BufferStrategy bs = getBufferStrategy();
+		if(bs == null)
+		{
+			createBufferStrategy(3);
+			return;	
+		}
 		
+		Graphics g = bs.getDrawGraphics();
+		
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		g.dispose();
+		bs.show();
 	}
 
 	public synchronized void start()
@@ -48,6 +64,7 @@ public class Game extends Canvas implements Runnable
 		}
 	}
 	
+	@Override
 	public void run() 
 	{
 		long lastTime = System.nanoTime();
