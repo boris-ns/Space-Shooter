@@ -3,6 +3,9 @@ package com.game.objects;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import com.game.input.KeyInput;
+import com.game.main.Game;
+
 public class Player 
 {
 	private float x, velX;
@@ -15,11 +18,22 @@ public class Player
 		this.x = x;
 		this.y = 450;
 		this.id = id;
+		velX = 0;
 	}
 	
 	public void tick()
 	{
+		x += velX;
 		
+		if(x <= 5) x = 5;
+		if(x >= Game.WIDTH - (width + 13)) x = Game.WIDTH - (width + 13); 
+		
+		if(KeyInput.left)
+			velX = -8f;		
+		else if(KeyInput.right)
+			velX = 8;
+		else
+			velX = 0;
 	}
 	
 	public void render(Graphics g)
