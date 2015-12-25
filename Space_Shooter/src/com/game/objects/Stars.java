@@ -21,7 +21,6 @@ public class Stars
 	{		
 		for(int i = 0; i < stars.size(); i++)
 			stars.get(i).tick();
-
 	}
 	
 	public void render(Graphics g)
