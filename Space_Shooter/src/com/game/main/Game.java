@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import com.game.graphics.Window;
+import com.game.input.KeyInput;
 import com.game.objects.ObjectId;
 import com.game.objects.Player;
 
@@ -17,16 +18,21 @@ public class Game extends Canvas implements Runnable
 	private Thread thread;
 	private boolean running = false;
 	private Player player;
+	private KeyInput keyInput;
 
 
 	public Game()
 	{
 		new Window(WIDTH, HEIGHT, "Space Shooter", this);
+		keyInput = new KeyInput();
+		addKeyListener(keyInput);
+		
 		player = new Player(WIDTH / 2 - 32, ObjectId.Player);
 	}
 	
 	public void tick()
 	{
+		keyInput.tick();
 		player.tick();
 	}
 	
@@ -73,6 +79,8 @@ public class Game extends Canvas implements Runnable
 	@Override
 	public void run() 
 	{
+		this.requestFocus();
+		
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
