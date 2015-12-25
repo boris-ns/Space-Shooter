@@ -34,8 +34,7 @@ public class Star
 	
 	public void render(Graphics g)
 	{
-		g.setColor(Color.WHITE);
-		g.fillRect((int)x, (int)y, width, width);
+		g.drawImage(Game.tex.star, (int)x, (int)y, width, width, null);
 	}
 	
 	public float getY() { return y;}

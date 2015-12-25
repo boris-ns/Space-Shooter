@@ -9,6 +9,7 @@ public class Texture
 	SpriteSheet ss = null;
 
 	public BufferedImage[] player = new BufferedImage[1];
+	public BufferedImage star = null;
 	private BufferedImage spriteSheet = null;
 	
 	public Texture()
@@ -25,5 +26,6 @@ public class Texture
 	private void getTextures()
 	{
 		player[0] = ss.grabImage(1, 1, 48, 48);
+		star = ss.grabImage(2, 1, 48, 48);
 	}
 }
