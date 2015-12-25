@@ -9,6 +9,7 @@ import com.game.graphics.Window;
 import com.game.input.KeyInput;
 import com.game.objects.ObjectId;
 import com.game.objects.Player;
+import com.game.objects.Stars;
 
 public class Game extends Canvas implements Runnable
 {
@@ -19,6 +20,7 @@ public class Game extends Canvas implements Runnable
 	private boolean running = false;
 	private Player player;
 	private KeyInput keyInput;
+	private Stars stars;
 
 
 	public Game()
@@ -27,13 +29,15 @@ public class Game extends Canvas implements Runnable
 		keyInput = new KeyInput();
 		addKeyListener(keyInput);
 		
+		stars = new Stars();
 		player = new Player(WIDTH / 2 - 32, ObjectId.Player);
 	}
 	
 	public void tick()
 	{
-		player.tick();
+		stars.tick();
 		keyInput.tick();
+		player.tick();
 	}
 	
 	public void render()
@@ -50,6 +54,7 @@ public class Game extends Canvas implements Runnable
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
+		stars.render(g);
 		player.render(g);
 		
 		g.dispose();
