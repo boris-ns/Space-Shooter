@@ -3,14 +3,15 @@ package com.game.objects;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import com.game.graphics.Texture;
 import com.game.input.KeyInput;
 import com.game.main.Game;
 
 public class Player 
 {
+	public static final int width = 48; // Width and height are equal
 	private float x, velX;
 	private final float y;
-	private final int width = 32; // Width and height are equal
 	private ObjectId id;
 	
 	public Player(float x, ObjectId id)
@@ -38,8 +39,7 @@ public class Player
 	
 	public void render(Graphics g)
 	{
-		g.setColor(Color.blue);
-		g.fillRect((int)x, (int)y, (int)width, (int)width);
+		g.drawImage(Game.tex.player[0], (int)x, (int)y, null);
 	}
 	
 	public float getX() { return x;}
