@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import com.game.graphics.Texture;
 import com.game.graphics.Window;
 import com.game.input.KeyInput;
 import com.game.objects.ObjectId;
@@ -14,6 +15,7 @@ import com.game.objects.Stars;
 public class Game extends Canvas implements Runnable
 {
 	public static final int WIDTH = 800, HEIGHT = 550;
+	public static Texture tex = new Texture();
 	
 	private static final long serialVersionUID = 1L;
 	private Thread thread;
@@ -21,11 +23,12 @@ public class Game extends Canvas implements Runnable
 	private Player player;
 	private KeyInput keyInput;
 	private Stars stars;
-
+	
 
 	public Game()
 	{
 		new Window(WIDTH, HEIGHT, "Space Shooter", this);
+		
 		keyInput = new KeyInput();
 		addKeyListener(keyInput);
 		
