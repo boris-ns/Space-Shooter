@@ -3,10 +3,13 @@ package com.game.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import com.game.objects.Player;
+
 public class KeyInput implements KeyListener
 {
+	public static boolean left, right, fire, exit;
+
 	private boolean[] keyboard = new boolean[120];
-	private boolean left, right, fire, exit;
 	
 	public void tick()
 	{
