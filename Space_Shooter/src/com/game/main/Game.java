@@ -12,7 +12,7 @@ import com.game.objects.Player;
 
 public class Game extends Canvas implements Runnable
 {
-	public final int WIDTH = 800, HEIGHT = 550;
+	public static final int WIDTH = 800, HEIGHT = 550;
 	
 	private static final long serialVersionUID = 1L;
 	private Thread thread;
@@ -32,8 +32,8 @@ public class Game extends Canvas implements Runnable
 	
 	public void tick()
 	{
-		keyInput.tick();
 		player.tick();
+		keyInput.tick();
 	}
 	
 	public void render()
