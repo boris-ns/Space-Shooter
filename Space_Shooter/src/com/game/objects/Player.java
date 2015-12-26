@@ -13,13 +13,15 @@ public class Player
 	private float x, velX;
 	private final float y;
 	private ObjectId id;
+	private Bullets bullets;
 	
-	public Player(float x, ObjectId id)
+	public Player(float x, ObjectId id, Bullets bullets)
 	{
 		this.x = x;
 		this.y = 450;
 		this.id = id;
 		velX = 0;
+		this.bullets = bullets;
 	}
 	
 	public void tick()
@@ -28,6 +30,12 @@ public class Player
 		
 		if(x <= 5) x = 5;
 		if(x >= Game.WIDTH - (width + 13)) x = Game.WIDTH - (width + 13); 
+		
+		if(KeyInput.fire)
+		{
+			bullets.addBullet(new Bullet(x + 1, y - 5, -5));
+			bullets.addBullet(new Bullet(x + width - 4, y - 5, -5));
+		}
 		
 		if(KeyInput.left)
 			velX = -8f;		

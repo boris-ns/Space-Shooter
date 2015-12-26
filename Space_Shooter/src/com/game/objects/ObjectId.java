@@ -4,5 +4,6 @@ public enum ObjectId
 {
 	Player,
 	Star,
-	Enemy;
+	Enemy,
+	Bullet;
 }

@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 import com.game.graphics.Texture;
 import com.game.graphics.Window;
 import com.game.input.KeyInput;
+import com.game.objects.Bullets;
 import com.game.objects.ObjectId;
 import com.game.objects.Player;
 import com.game.objects.Stars;
@@ -23,7 +24,7 @@ public class Game extends Canvas implements Runnable
 	private Player player;
 	private KeyInput keyInput;
 	private Stars stars;
-	
+	private Bullets bullets;
 
 	public Game()
 	{
@@ -32,12 +33,14 @@ public class Game extends Canvas implements Runnable
 		keyInput = new KeyInput();
 		addKeyListener(keyInput);
 		
+		bullets = new Bullets();
 		stars = new Stars();
-		player = new Player(WIDTH / 2 - 32, ObjectId.Player);
+		player = new Player(WIDTH / 2 - 32, ObjectId.Player, bullets);
 	}
 	
 	public void tick()
 	{
+		bullets.tick();
 		stars.tick();
 		keyInput.tick();
 		player.tick();
@@ -57,6 +60,7 @@ public class Game extends Canvas implements Runnable
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
+		bullets.render(g);
 		stars.render(g);
 		player.render(g);
 		
