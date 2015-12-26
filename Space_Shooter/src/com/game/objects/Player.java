@@ -13,6 +13,7 @@ public class Player
 	private float x, velX;
 	private final float y;
 	private ObjectId id;
+	private int health = 100;
 	private Bullets bullets;
 	
 	public Player(float x, ObjectId id, Bullets bullets)
@@ -53,6 +54,8 @@ public class Player
 	public float getX() { return x;}
 	public float getVelX() { return velX;}
 	public ObjectId getId() { return id;}
+	public int getHealth() { return health;}
 	public void setX(float x) {	this.x = x;}
 	public void setVelX(float velX) { this.velX = velX;}
+	public void setHealth(int health) { this.health = health;}
 }

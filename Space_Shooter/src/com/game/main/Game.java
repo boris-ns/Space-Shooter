@@ -9,6 +9,7 @@ import com.game.graphics.Texture;
 import com.game.graphics.Window;
 import com.game.input.KeyInput;
 import com.game.objects.Bullets;
+import com.game.objects.Hud;
 import com.game.objects.ObjectId;
 import com.game.objects.Player;
 import com.game.objects.Stars;
@@ -25,6 +26,7 @@ public class Game extends Canvas implements Runnable
 	private KeyInput keyInput;
 	private Stars stars;
 	private Bullets bullets;
+	private Hud hud;
 
 	public Game()
 	{
@@ -36,6 +38,7 @@ public class Game extends Canvas implements Runnable
 		bullets = new Bullets();
 		stars = new Stars();
 		player = new Player(WIDTH / 2 - 32, ObjectId.Player, bullets);
+		hud = new Hud(player);
 	}
 	
 	public void tick()
@@ -44,6 +47,7 @@ public class Game extends Canvas implements Runnable
 		stars.tick();
 		keyInput.tick();
 		player.tick();
+		hud.tick();
 	}
 	
 	public void render()
@@ -63,6 +67,7 @@ public class Game extends Canvas implements Runnable
 		bullets.render(g);
 		stars.render(g);
 		player.render(g);
+		hud.render(g);
 		
 		g.dispose();
 		bs.show();
