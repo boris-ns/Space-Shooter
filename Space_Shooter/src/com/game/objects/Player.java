@@ -1,9 +1,9 @@
 package com.game.objects;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
-import com.game.graphics.Texture;
+import com.game.framework.Bullets;
 import com.game.input.KeyInput;
 import com.game.main.Game;
 
@@ -15,6 +15,7 @@ public class Player
 	private ObjectId id;
 	private int health = 100;
 	private Bullets bullets;
+	private int score;
 	
 	public Player(float x, ObjectId id, Bullets bullets)
 	{
@@ -23,6 +24,7 @@ public class Player
 		this.id = id;
 		velX = 0;
 		this.bullets = bullets;
+		score = 0;
 	}
 	
 	public void tick()
@@ -31,6 +33,9 @@ public class Player
 		
 		if(x <= 5) x = 5;
 		if(x >= Game.WIDTH - (width + 13)) x = Game.WIDTH - (width + 13); 
+		
+		if(health == 0)
+			Game.gameState = Game.STATE.GameOver;
 		
 		if(KeyInput.fire)
 		{
@@ -51,11 +56,18 @@ public class Player
 		g.drawImage(Game.tex.player[0], (int)x, (int)y, null);
 	}
 	
+	public Rectangle getBounds()
+	{
+		return new Rectangle((int)x, (int)y, width, width);
+	}
+	
 	public float getX() { return x;}
 	public float getVelX() { return velX;}
 	public ObjectId getId() { return id;}
 	public int getHealth() { return health;}
+	public int getScore() { return score;}
 	public void setX(float x) {	this.x = x;}
 	public void setVelX(float velX) { this.velX = velX;}
 	public void setHealth(int health) { this.health = health;}
+	public void setScore(int score) { this.score = score;}
 }

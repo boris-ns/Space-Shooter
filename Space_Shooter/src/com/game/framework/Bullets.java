@@ -1,11 +1,13 @@
-package com.game.objects;
+package com.game.framework;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import com.game.objects.Bullet;
+
 public class Bullets 
 {
-	private LinkedList<Bullet> bullets = new LinkedList<Bullet>();
+	public LinkedList<Bullet> bullets = new LinkedList<Bullet>();
 	
 	public void tick()
 	{

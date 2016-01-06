@@ -5,19 +5,24 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import com.game.framework.Bullets;
+import com.game.framework.CollisionHandler;
+import com.game.framework.EnemyBullets;
+import com.game.framework.EnemyHandler;
+import com.game.framework.Stars;
 import com.game.graphics.Texture;
 import com.game.graphics.Window;
 import com.game.input.KeyInput;
-import com.game.objects.Bullets;
 import com.game.objects.Hud;
 import com.game.objects.ObjectId;
 import com.game.objects.Player;
-import com.game.objects.Stars;
 
 public class Game extends Canvas implements Runnable
 {
 	public static final int WIDTH = 800, HEIGHT = 550;
 	public static Texture tex = new Texture();
+	public static enum STATE { Menu, Game, Help, GameOver};
+	public static STATE gameState = STATE.Menu;
 	
 	private static final long serialVersionUID = 1L;
 	private Thread thread;
@@ -26,28 +31,44 @@ public class Game extends Canvas implements Runnable
 	private KeyInput keyInput;
 	private Stars stars;
 	private Bullets bullets;
+	private EnemyBullets eBullets;
+	private EnemyHandler enemyHandler;
 	private Hud hud;
-
+	private CollisionHandler collisionHandler;
+	private Menu menu;
+	
 	public Game()
 	{
 		new Window(WIDTH, HEIGHT, "Space Shooter", this);
+		menu = new Menu();
 		
 		keyInput = new KeyInput();
 		addKeyListener(keyInput);
 		
 		bullets = new Bullets();
+		eBullets = new EnemyBullets();
 		stars = new Stars();
 		player = new Player(WIDTH / 2 - 32, ObjectId.Player, bullets);
+		enemyHandler = new EnemyHandler(player, eBullets);
 		hud = new Hud(player);
+		collisionHandler = new CollisionHandler(player, enemyHandler, bullets, eBullets);
 	}
 	
 	public void tick()
 	{
-		bullets.tick();
-		stars.tick();
 		keyInput.tick();
-		player.tick();
-		hud.tick();
+		stars.tick();
+		if(gameState == STATE.Menu)
+			menu.tick();
+		else if(gameState == STATE.Game)
+		{
+			bullets.tick();
+			eBullets.tick();
+			enemyHandler.tick();
+			player.tick();
+			collisionHandler.tick();
+			hud.tick();
+		}
 	}
 	
 	public void render()
@@ -63,12 +84,19 @@ public class Game extends Canvas implements Runnable
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
-		
-		bullets.render(g);
 		stars.render(g);
-		player.render(g);
-		hud.render(g);
 		
+		if(gameState == STATE.Menu || gameState == STATE.Help)
+			menu.render(g);
+		else if(gameState == STATE.Game)
+		{
+			bullets.render(g);
+			eBullets.render(g);
+			enemyHandler.render(g);
+			player.render(g);
+			hud.render(g);
+		}
+			
 		g.dispose();
 		bs.show();
 	}

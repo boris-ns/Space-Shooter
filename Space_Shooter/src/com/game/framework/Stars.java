@@ -1,10 +1,11 @@
-package com.game.objects;
+package com.game.framework;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.Random;
 
 import com.game.main.Game;
+import com.game.objects.Star;
 
 public class Stars 
 {

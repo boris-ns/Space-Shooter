@@ -4,20 +4,20 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Bullet 
+public class EnemyBullet 
 {
 	private final float x;
 	private float y, velY;
 	private ObjectId id;
-	private int width = 2, height = 4;
-	private Color color = new Color(240, 240, 240);
+	private int width = 10, height = 10;
+	private Color color = new Color(255, 0, 0);
 	
-	public Bullet(float x, float y, float velY)
+	public EnemyBullet(float x, float y, float velY)
 	{
 		this.x = x;
 		this.y = y;
 		this.velY = velY;
-		this.id = ObjectId.Bullet;
+		this.id = ObjectId.EnemyBullet;
 	}
 	
 	public void tick()
@@ -32,7 +32,6 @@ public class Bullet
 	}
 	
 	public float getY() { return y;}
-	public ObjectId getId() { return id;}
 	
 	public Rectangle getBounds()
 	{

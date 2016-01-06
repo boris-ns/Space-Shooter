@@ -1,6 +1,7 @@
 package com.game.objects;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 public class Hud 
@@ -21,5 +22,9 @@ public class Hud
 	{
 		g.setColor(Color.GREEN);
 		g.fillRect(15, 15, player.getHealth(), 7);
+		
+		Font font = new Font("Arial", 1, 15);
+		g.setFont(font);
+		g.drawString("Score " + player.getScore(), 15, 40);
 	}
 }

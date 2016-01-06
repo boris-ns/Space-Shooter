@@ -10,6 +10,7 @@ public class Texture
 
 	public BufferedImage[] player = new BufferedImage[1];
 	public BufferedImage star = null;
+	public BufferedImage enemy = null;
 	private BufferedImage spriteSheet = null;
 	
 	public Texture()
@@ -27,5 +28,6 @@ public class Texture
 	{
 		player[0] = ss.grabImage(1, 1, 48, 48);
 		star = ss.grabImage(2, 1, 48, 48);
+		enemy = ss.grabImage(3,  1, 48, 48);
 	}
 }

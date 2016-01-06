@@ -5,5 +5,6 @@ public enum ObjectId
 	Player,
 	Star,
 	Enemy,
-	Bullet;
+	Bullet,
+	EnemyBullet;
 }
