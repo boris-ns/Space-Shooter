@@ -3,6 +3,7 @@ package com.game.framework;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import com.game.main.Game;
 import com.game.objects.Bullet;
 
 public class Bullets 
@@ -16,6 +17,12 @@ public class Bullets
 			bullets.get(i).tick();
 			
 			if(bullets.get(i).getY() <= -10)
+				bullets.remove(i);
+		}
+		
+		if(Game.gameState == Game.STATE.GameOver)
+		{
+			for(int i = 0; i < bullets.size(); i++)
 				bullets.remove(i);
 		}
 	}

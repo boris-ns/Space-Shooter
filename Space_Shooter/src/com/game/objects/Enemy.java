@@ -6,13 +6,12 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 
-import com.game.framework.Bullets;
 import com.game.framework.EnemyBullets;
 import com.game.main.Game;
 
 public class Enemy 
 {
-	private float x, y, velX, velY;
+	private float x, y, velY;
 	private ObjectId id;
 	private int width = 32; // width and height are equal
 	private float health = 100;

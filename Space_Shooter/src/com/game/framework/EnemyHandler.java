@@ -19,17 +19,7 @@ public class EnemyHandler
 	public EnemyHandler(Player player, EnemyBullets eBullets)
 	{
 		this.player = player;
-		this.eBullets = eBullets;
-		
-		for(int i = 0, xx = 128; i < 5; i++, xx += 128)
-		{
-			if(i == 0 || i == 4)
-				enemies.add(new Enemy(xx, -68, 0.2f, true, eBullets));
-			else if(i == 1 || i == 3)
-				enemies.add(new Enemy(xx, -58, 0.2f, true, eBullets));
-			else if(i == 2)
-				enemies.add(new Enemy(xx, -48, 0.2f, true, eBullets));
-		}
+		this.eBullets = eBullets;		
 	}
 	
 	public void tick()
@@ -52,8 +42,28 @@ public class EnemyHandler
 			}
 		}
 		
+		if(Game.gameState == Game.STATE.GameOver)
+		{
+			for(int i = 0; i < enemies.size(); i++)
+				enemies.remove(i);
+		}
+		
 		switch(player.getScore())
 		{
+			case -1 :	for(int i = 0, xx = 128; i < 5; i++, xx += 128)
+						{
+							if(i == 0 || i == 4)
+								enemies.add(new Enemy(xx, -68, 0.2f, false, eBullets));
+							else if(i == 1 || i == 3)
+								enemies.add(new Enemy(xx, -58, 0.2f, false, eBullets));
+							else if(i == 2)
+								enemies.add(new Enemy(xx, -48, 0.2f, false, eBullets));
+						}
+			
+						player.setScore(0);
+			
+						break;
+		
 			case 5 :	for(int i = 0, xx = 96; i < 7; i++, xx += 96)
 						{
 							if(i == 0 || i == 6)
@@ -112,6 +122,36 @@ public class EnemyHandler
 								enemies.add(new Enemy(xx, -58, 0.4f, r.nextBoolean(), eBullets));
 							else if(i == 0 || i == 6)
 								enemies.add(new Enemy(xx, -48, 0.4f, r.nextBoolean(), eBullets));
+						}
+						player.setScore(player.getScore() + 3);
+						
+						break;
+						
+			case 44 :	for(int i = 0, xx = 96; i < 7; i++, xx += 96)
+						{
+							if(i == 3)
+								enemies.add(new Enemy(xx, -78, 0.4f, true, eBullets));
+							else if(i == 1 || i == 5)
+								enemies.add(new Enemy(xx, -68, 0.4f, true, eBullets));
+							else if(i == 2 || i == 4)
+								enemies.add(new Enemy(xx, -58, 0.4f, true, eBullets));
+							else if(i == 0 || i == 6)
+								enemies.add(new Enemy(xx, -48, 0.4f, true, eBullets));
+						}
+						player.setScore(player.getScore() + 3);
+						
+						break;
+						
+			case 55 :	for(int i = 0, xx = 96; i < 7; i++, xx += 96)
+						{
+							if(i == 3)
+								enemies.add(new Enemy(xx, -78, 0.41f, true, eBullets));
+							else if(i == 1 || i == 5)
+								enemies.add(new Enemy(xx, -68, 0.41f, true, eBullets));
+							else if(i == 2 || i == 4)
+								enemies.add(new Enemy(xx, -58, 0.41f, true, eBullets));
+							else if(i == 0 || i == 6)
+								enemies.add(new Enemy(xx, -48, 0.41f, true, eBullets));
 						}
 						player.setScore(player.getScore() + 3);
 						

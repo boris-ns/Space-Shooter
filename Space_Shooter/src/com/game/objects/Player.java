@@ -13,7 +13,7 @@ public class Player
 	private float x, velX;
 	private final float y;
 	private ObjectId id;
-	private int health = 100;
+	private int health;
 	private Bullets bullets;
 	private int score;
 	
@@ -24,7 +24,8 @@ public class Player
 		this.id = id;
 		velX = 0;
 		this.bullets = bullets;
-		score = 0;
+		health = 100;
+		score = -1;
 	}
 	
 	public void tick()
@@ -34,8 +35,12 @@ public class Player
 		if(x <= 5) x = 5;
 		if(x >= Game.WIDTH - (width + 13)) x = Game.WIDTH - (width + 13); 
 		
-		if(health == 0)
+		if(health == 0 )
+		{
 			Game.gameState = Game.STATE.GameOver;
+			health = 100;
+			x = Game.WIDTH / 2 - 32;
+		}
 		
 		if(KeyInput.fire)
 		{
@@ -53,7 +58,7 @@ public class Player
 	
 	public void render(Graphics g)
 	{
-		g.drawImage(Game.tex.player[0], (int)x, (int)y, null);
+		g.drawImage(Game.tex.player, (int)x, (int)y, null);
 	}
 	
 	public Rectangle getBounds()

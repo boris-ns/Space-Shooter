@@ -5,12 +5,19 @@ import java.awt.event.KeyListener;
 
 import com.game.main.Game;
 import com.game.main.Menu;
+import com.game.objects.Player;
 
 public class KeyInput implements KeyListener
 {
 	public static boolean left, right, fire, exit, menuUp, menuDown, menuEnter;
 
 	private boolean[] keyboard = new boolean[150];
+	private Player player;
+	
+	public KeyInput(Player player)
+	{
+		this.player = player;
+	}
 	
 	public void tick()
 	{
@@ -53,6 +60,11 @@ public class KeyInput implements KeyListener
 		}
 		else if(Game.gameState == Game.STATE.Help && menuEnter)
 			Game.gameState = Game.STATE.Menu;
+		else if(Game.gameState == Game.STATE.GameOver && menuEnter)
+		{
+			Game.gameState = Game.STATE.Game;
+			player.setScore(-1);
+		}
 	}
 
 	@Override

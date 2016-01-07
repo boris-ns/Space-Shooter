@@ -36,19 +36,22 @@ public class Game extends Canvas implements Runnable
 	private Hud hud;
 	private CollisionHandler collisionHandler;
 	private Menu menu;
+	private GameOverMenu gameOver;
 	
 	public Game()
 	{
 		new Window(WIDTH, HEIGHT, "Space Shooter", this);
 		menu = new Menu();
-		
-		keyInput = new KeyInput();
-		addKeyListener(keyInput);
+		gameOver = new GameOverMenu();
 		
 		bullets = new Bullets();
-		eBullets = new EnemyBullets();
-		stars = new Stars();
 		player = new Player(WIDTH / 2 - 32, ObjectId.Player, bullets);
+		
+		keyInput = new KeyInput(player);
+		addKeyListener(keyInput);
+				
+		eBullets = new EnemyBullets();
+		stars = new Stars();		
 		enemyHandler = new EnemyHandler(player, eBullets);
 		hud = new Hud(player);
 		collisionHandler = new CollisionHandler(player, enemyHandler, bullets, eBullets);
@@ -58,6 +61,7 @@ public class Game extends Canvas implements Runnable
 	{
 		keyInput.tick();
 		stars.tick();
+		
 		if(gameState == STATE.Menu)
 			menu.tick();
 		else if(gameState == STATE.Game)
@@ -68,6 +72,13 @@ public class Game extends Canvas implements Runnable
 			player.tick();
 			collisionHandler.tick();
 			hud.tick();
+		}
+		else if(gameState == STATE.GameOver)
+		{
+			gameOver.tick(player.getScore());
+			eBullets.tick();
+			bullets.tick();
+			enemyHandler.tick();
 		}
 	}
 	
@@ -84,6 +95,7 @@ public class Game extends Canvas implements Runnable
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
 		stars.render(g);
 		
 		if(gameState == STATE.Menu || gameState == STATE.Help)
@@ -96,6 +108,8 @@ public class Game extends Canvas implements Runnable
 			player.render(g);
 			hud.render(g);
 		}
+		else if(gameState == STATE.GameOver)
+			gameOver.render(g);
 			
 		g.dispose();
 		bs.show();

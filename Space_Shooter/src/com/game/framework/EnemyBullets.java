@@ -19,6 +19,12 @@ public class EnemyBullets
 			if(eBullets.get(i).getY() > Game.HEIGHT + 10)
 				eBullets.remove(i);
 		}
+		
+		if(Game.gameState == Game.STATE.GameOver)
+		{
+			for(int i = 0; i < eBullets.size(); i++)
+				eBullets.remove(i);
+		}
 	}
 	
 	public void render(Graphics g)

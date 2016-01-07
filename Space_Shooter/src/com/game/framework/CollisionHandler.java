@@ -26,7 +26,7 @@ public class CollisionHandler
 			{	
 				if(enemies.enemies.get(i).getBounds().intersects(bullets.bullets.get(j).getBounds()))
 				{
-					enemies.enemies.get(i).setHealth(enemies.enemies.get(i).getHealth() - 0.5f);	
+					enemies.enemies.get(i).setHealth(enemies.enemies.get(i).getHealth() - 1f);	
 					bullets.bullets.remove(j);
 					
 					if(enemies.enemies.get(i).getHealth() == 0)
@@ -49,7 +49,7 @@ public class CollisionHandler
 		{
 			if(eBullets.eBullets.get(i).getBounds().intersects(player.getBounds()))
 			{
-				player.setHealth(player.getHealth() - 5);
+				player.setHealth(player.getHealth() - 10);
 				eBullets.eBullets.remove(i);
 			}
 		}
